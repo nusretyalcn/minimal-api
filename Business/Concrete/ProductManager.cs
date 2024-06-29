@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete;
 
@@ -27,5 +28,10 @@ public class ProductManager:IProductService
     public void Add(Product product)
     {
         _productDal.Add(product);
+    }
+
+    public List<ProductDetailDto> GetProductDetails()
+    {
+        return _productDal.GetProductDetail();
     }
 }
