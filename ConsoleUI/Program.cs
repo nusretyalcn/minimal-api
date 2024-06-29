@@ -6,9 +6,16 @@ using DataAccess.Concrete.EntityFramework;
 ProductManager productManager = new ProductManager(new EfProductDal());
 
 
-foreach (var product in productManager.GetAll())
+// foreach (var product in productManager.GetAll())
+// {
+//     Console.WriteLine(product.ProductName);
+// }
+
+CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+
+foreach (var c in customerManager.GetAll())
 {
-    Console.WriteLine(product.ProductName);
+    Console.WriteLine(c.CustomerName);
 }
 
 Console.WriteLine("Hello, World!");
