@@ -10,6 +10,8 @@ public interface IProductService
     IDataResult<List<Product>> GetByCategoryId(int id);
     IDataResult<List<ProductDetailDto>> GetProductDetails();
     IResult Add(Product product);
+    IResult Update(Product product);
+    IResult Delete(Product product);
     IDataResult<Product> GetById(int id);
     
 }

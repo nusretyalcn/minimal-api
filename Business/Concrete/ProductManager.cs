@@ -41,6 +41,18 @@ public class ProductManager:IProductService
         return new SuccessResult(Messages.ProductAdded);
     }
 
+    public IResult Update(Product product)
+    {
+        _productDal.Update(product);
+        return new SuccessResult(Messages.ProductUpdated);
+    }
+
+    public IResult Delete(Product product)
+    {
+        _productDal.Delete(product);
+        return new SuccessResult(Messages.ProductDeleted);
+    }
+
     public IDataResult<Product> GetById(int id)
     {
         return new SuccessDataResult<Product>(_productDal.Get(p=>p.Id == id));
