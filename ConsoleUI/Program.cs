@@ -1,15 +1,27 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Business.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
 
 ProductManager productManager = new ProductManager(new EfProductDal());
 
 
-foreach (var product in productManager.GetProductDetails())
+var result = productManager.GetProductDetails();
+
+if (result.Success)
 {
-    Console.WriteLine(product.ProductName + " " + product.CategoryName);
+    foreach (var product in result.Data)
+    {
+        Console.WriteLine(product.ProductName + " " + product.CategoryName);
+    }
 }
+else
+{
+    Console.WriteLine(result.Message);
+}
+
+
 
 // CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
 //
