@@ -1,15 +1,12 @@
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using FluentValidation;
-using ValidationException = FluentValidation.ValidationException;
 
 namespace Business.Concrete;
 
@@ -36,21 +33,24 @@ public class ProductManager:IProductService
         return new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.CategoryId == id),Messages.ProductsListed);
     }
 
+    [ValidationAspect(typeof(ProductValidator))]
     public IResult Add(Product product)
     {
-        ValidationTool.Validate(new ProductValidator(),product);
+        //ValidationTool.Validate(new ProductValidator(),product);
         _productDal.Add(product);
         return new SuccessResult(Messages.ProductAdded);
     }
 
     public IResult Update(Product product)
     {
+        ValidationTool.Validate(new ProductValidator(),product);
         _productDal.Update(product);
         return new SuccessResult(Messages.ProductUpdated);
     }
 
     public IResult Delete(Product product)
     {
+        ValidationTool.Validate(new ProductValidator(),product);
         _productDal.Delete(product);
         return new SuccessResult(Messages.ProductDeleted);
     }
