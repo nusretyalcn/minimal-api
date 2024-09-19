@@ -17,4 +17,6 @@ public static class Messages
     public static readonly string CategoryDeleted = "Kategori güncellendi";
     public static readonly string CategoryAdded = "Kategori eklendi";
     public static readonly string UnitPriceInvalid = "Ürün fiyatı geçersiz";
+    public static readonly string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürün olabilir";
+    public static readonly string ProductNameAlreadyExists = "Ürün ismi zaten mevcut";
 }
