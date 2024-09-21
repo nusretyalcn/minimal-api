@@ -38,6 +38,17 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result);
+        }        
+        [HttpGet("getbyname")]
+        public IActionResult GetByName(string name)
+        {
+            var result = _productService.GetByName(name);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
 
         [HttpPost("add")]

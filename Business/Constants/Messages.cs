@@ -20,4 +20,5 @@ public static class Messages
     public static readonly string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürün olabilir";
     public static readonly string ProductNameAlreadyExists = "Ürün ismi zaten mevcut";
     public static readonly string CategoryLimitExceded = "Kategori limiti aşıldığı için yeni ürün eklenemiyor";
+    public static readonly string AuthorizationDenied = "Yetkiniz yok";
 }

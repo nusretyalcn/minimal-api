@@ -13,5 +13,6 @@ public interface IProductService
     IResult Update(Product product);
     IResult Delete(Product product);
     IDataResult<Product> GetById(int id);
+    IDataResult<Product> GetByName(string name);
     
 }

@@ -1,4 +1,5 @@
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -35,7 +36,8 @@ public class ProductManager:IProductService
     {
         return new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.CategoryId == id),Messages.ProductsListed);
     }
-
+    
+    [SecuredOperation("product.add,admin")]
     [ValidationAspect(typeof(ProductValidator))]
     public IResult Add(Product product)
     {
@@ -68,6 +70,11 @@ public class ProductManager:IProductService
     public IDataResult<Product> GetById(int id)
     {
         return new SuccessDataResult<Product>(_productDal.Get(p=>p.Id == id));
+    }
+
+    public IDataResult<Product> GetByName(string name)
+    {
+        return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductName == name));
     }
 
     public IDataResult<List<ProductDetailDto>> GetProductDetails()
