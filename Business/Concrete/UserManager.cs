@@ -27,8 +27,7 @@ public class UserManager:IUserService
 
     public IDataResult<User> GetByEmail(string email)
     {
-        return new SuccessDataResult<User>(_userDal.Get(p=>p.Email==email));
-        
+        return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
     }
     
     public IDataResult<List<User>> GetAll()

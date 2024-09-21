@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Core.Utilities.Security.Hashing;
@@ -26,6 +27,10 @@ public class HashingHelper
                     return false;
                 }
             }
+            // if (computedHash.SequenceEqual(passwordHash))
+            // {
+            //     return true;
+            // }
             return true;
         }
         
