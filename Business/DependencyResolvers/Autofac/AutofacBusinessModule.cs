@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Helpers;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -26,6 +27,10 @@ public class AutofacBusinessModule :Module
         builder.RegisterType<AuthManager>().As<IAuthService>();
         builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
+        builder.RegisterType<ProductImageManager>().As<IProductImageService>().SingleInstance();
+        builder.RegisterType<EfProductImageDal>().As<IProductImageDal>().SingleInstance();
+        
+        builder.RegisterType<FileHelper>().As<IFileHelper>().SingleInstance();
         //builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
         
         var assembly = System.Reflection.Assembly.GetExecutingAssembly();
