@@ -2,6 +2,8 @@ using System.Configuration;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -42,7 +44,11 @@ var  tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOp
             IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
         };
     });
- ServiceTool.Create(builder.Services);
+ builder.Services.AddDependencyResolvers(new ICoreModule[]
+ {
+     new CoreModule()
+ });
+ //ServiceTool.Create(builder.Services);
 
 
 var app = builder.Build();

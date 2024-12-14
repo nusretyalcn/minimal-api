@@ -30,5 +30,17 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpPost("delete")]
+        public IActionResult Delete([FromForm] ProductImage productImage)
+        {
+            var productDeleteImage = _productImageService.GetByImageId(productImage.Id).Data;
+            var result = _productImageService.Delete(productDeleteImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

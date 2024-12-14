@@ -26,12 +26,11 @@ public class FileHelper:IFileHelper
         return null;
     }
 
-    public void Delete(string filePath, string root)
+    public void Delete(string filePath)
     {
-        string path = Path.Combine(root, filePath);
-        if (File.Exists(path))
+        if (File.Exists(filePath))
         {   
-            File.Delete(path);
+            File.Delete(filePath);
         }
     }
 
@@ -39,7 +38,7 @@ public class FileHelper:IFileHelper
     {
         if (File.Exists(Path.Combine(root, filePath)))
         {
-            Delete(filePath, root);
+            Delete(filePath);
         }
         return Upload(file , root);
     }

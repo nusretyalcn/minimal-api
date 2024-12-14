@@ -29,12 +29,19 @@ public class ProductImageManager: IProductImageService
         return new SuccessResult("Resim başarıyla yüklendi");
     }
 
+    public IResult Delete(ProductImage productImage)
+    {
+        _fileHelper.Delete(PathConstants.ImagesPath + productImage.ImagePath);
+        _productImageDal.Delete(productImage);
+        return new SuccessResult();
+    }
+
     public IDataResult<List<ProductImage>> GetAll()
     {
         return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll());
     }
 
-    public IResult UpdateProductImage(IFormFile file, ProductImage productImage)
+    public IResult UpdateImage(IFormFile file, ProductImage productImage)
     {
         var currentCarImage = _productImageDal.Get(x => x.ProductId == productImage.ProductId);//&& x.Id == productImage.Id);
         string newPath = _fileHelper.Update(file, currentCarImage.ImagePath, PathConstants.ImagesPath);
@@ -57,7 +64,12 @@ public class ProductImageManager: IProductImageService
             
             return new ErrorDataResult<List<ProductImage>>(CheckProductImage(id).Data);
     }
-    
+
+    public IDataResult<ProductImage> GetByImageId(int id)
+    {
+        return new SuccessDataResult<ProductImage>(_productImageDal.Get(c => c.Id == id));
+    }
+
     private IDataResult<List<ProductImage>> CheckProductImage(int productId)
     {
         int count = _productImageDal.GetAll(x => x.ProductId == productId).Count();

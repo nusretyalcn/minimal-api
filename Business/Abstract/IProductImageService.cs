@@ -7,7 +7,9 @@ namespace Business.Abstract;
 public interface IProductImageService
 {
     IResult Add(IFormFile file, ProductImage productImage);
+    IResult Delete(ProductImage productImage);
     IDataResult<List<ProductImage>> GetAll();
-    IResult UpdateProductImage(IFormFile file, ProductImage productImage);
+    IResult UpdateImage(IFormFile file, ProductImage productImage);
     IDataResult<List<ProductImage>> GetByProductId(int id);
+    IDataResult<ProductImage> GetByImageId(int id);
 }
